@@ -747,7 +747,8 @@ Ensure the output contains ONLY the final English prompt string, and nothing els
                     });
                 
                 const { exec } = require('child_process');
-                exec('python3 /Users/admin/Documents/Work/TiktokDownloader/merge_documents.py', async (err, stdout, stderr) => {
+                const scriptPath = path.join(__dirname, 'merge_documents.py');
+                exec(`python3 "${scriptPath}"`, async (err, stdout, stderr) => {
                     if (err) {
                         console.error("Lỗi chạy script ghép PDF:", err);
                         return bot.editMessageText(`❌ Lỗi thực thi: ${err.message}`, {
@@ -819,7 +820,8 @@ Ensure the output contains ONLY the final English prompt string, and nothing els
                 });
                 
                 const { exec } = require('child_process');
-                exec('python3 /Users/admin/Documents/Work/TiktokDownloader/merge_videos.py', async (err, stdout, stderr) => {
+                const scriptPath = path.join(__dirname, 'merge_videos.py');
+                exec(`python3 "${scriptPath}"`, async (err, stdout, stderr) => {
                     if (err) {
                         console.error("Lỗi chạy script ghép Video:", err);
                         return bot.editMessageText(`❌ Lỗi thực thi: ${err.message}`, {
@@ -1017,8 +1019,8 @@ Ensure the output contains ONLY the final English prompt string, and nothing els
 
                     const { exec } = require('child_process');
                     const escapedUrl = fbUrl.replace(/(["\s'$`\\])/g, '\\$1');
-                    
-                    exec(`node /Users/admin/Documents/Work/TiktokDownloader/scrape_fb_photos.js "${escapedUrl}"`, async (err, stdout, stderr) => {
+                    const scriptPath = path.join(__dirname, 'scrape_fb_photos.js');
+                    exec(`node "${scriptPath}" "${escapedUrl}"`, async (err, stdout, stderr) => {
                         if (err) {
                             console.error("Lỗi chạy script cào ảnh FB:", err);
                             return bot.editMessageText(`❌ Lỗi thực thi: ${err.message}`, {

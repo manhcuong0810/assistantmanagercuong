@@ -1,4 +1,4 @@
-const puppeteer = require('/Users/admin/Documents/Work/TiktokDownloader/node_modules/puppeteer-core');
+const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
 
