@@ -1,8 +1,11 @@
 # Sử dụng hình ảnh Node.js chính thức có sẵn Chrome cho Puppeteer
 FROM ghcr.io/puppeteer/puppeteer:21.9.0
 
-# Chuyển quyền sang root để cài đặt và cấu hình thư mục
+# Chuyển quyền sang root để cài đặt
 USER root
+
+# Cài đặt ffmpeg (bao gồm ffprobe) và python3
+RUN apt-get update && apt-get install -y ffmpeg python3 && rm -rf /var/lib/apt/lists/*
 
 # Thiết lập thư mục làm việc
 WORKDIR /app
