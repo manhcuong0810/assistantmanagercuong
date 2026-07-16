@@ -273,7 +273,9 @@ function initBot() {
     bot.on('message', async (msg) => {
         const chatId = msg.chat.id;
         let text = msg.text;
+        let isBotMentioned = false;
         if (text) {
+            isBotMentioned = text.includes('@tiktokdowloaderdevbot') || (botInfo && text.includes(`@${botInfo.username}`));
             // Loại bỏ tag bot ở đầu tin nhắn (ví dụ trong chat nhóm: @tiktokdowloaderdevbot vẽ...)
             text = text.replace(/^\s*@tiktokdowloaderdevbot\s*/i, '').trim();
         }
@@ -1331,11 +1333,10 @@ Các trường hợp cụ thể:
                         );
                     } else if (parsed.chat_response) {
                         // Trả lời chém gió/tâm sự
-                        const isMentioned = botInfo && text.includes(`@${botInfo.username}`);
                         const isReplyToBot = msg.reply_to_message && botInfo && msg.reply_to_message.from.id === botInfo.id;
                         
                         // Ở chat riêng tư thì luôn phản hồi, ở nhóm thì chỉ phản hồi khi tag bot hoặc reply bot
-                        if (msg.chat.type === 'private' || isMentioned || isReplyToBot) {
+                        if (msg.chat.type === 'private' || isBotMentioned || isReplyToBot) {
                             await bot.sendMessage(chatId, parsed.chat_response, {
                                 reply_to_message_id: msg.message_id
                             }).catch(() => {});
