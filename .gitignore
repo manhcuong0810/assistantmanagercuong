@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.local
+downloads/
+merge_file/
+*.log
+.DS_Store
